@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>[CENSORED] ¿click and open?</title>
+  <title>Congratulations! You discovered the puzzle</title>
   <style>
     html, body {
       margin: 0;
@@ -30,15 +30,15 @@
       font-size: 2rem;
       padding: 20px 50px;
       background: black;
-      color: #b84dff;
-      border: 2px solid #b84dff;
+      color: red;
+      border: 2px solid red;
       cursor: pointer;
       font-family: monospace;
       animation: flicker 1.2s infinite;
     }
 
     #startButton:hover {
-      background: #b84dff;
+      background: red;
       color: black;
     }
 
@@ -53,14 +53,14 @@
       position: relative;
       width: 100vw;
       height: 100vh;
-      display: none; /* Oculto hasta que se le dé clic */
+      display: none;
       justify-content: center;
       align-items: center;
       z-index: 2;
     }
 
     .vhs-text {
-      color: #b84dff;
+      color: red;
       font-style: italic;
       font-size: 1.4rem;
       text-align: center;
@@ -69,9 +69,9 @@
       animation: vhsFlicker 1.6s infinite;
       position: relative;
       text-shadow:
-        -1px 0 red,
-         1px 0 blue,
-         0 -1px lime;
+        -1px 0 darkred,
+         1px 0 crimson,
+         0 -1px orangered;
       z-index: 3;
     }
 
@@ -115,7 +115,7 @@
 
   <!-- Contenedor inicial -->
   <div id="startContainer">
-    <button id="startButton">[CENSORED] ¿click and open?</button>
+    <button id="startButton">[CENSORED][CENSORED][CENSORED]¿click and abrir?</button>
   </div>
 
   <!-- Audio -->
@@ -171,7 +171,6 @@
       resizeCanvas();
       setInterval(generateNoise, 50);
 
-      // Pantalla completa
       const elem = document.documentElement;
       if (elem.requestFullscreen) {
         elem.requestFullscreen();
@@ -186,4 +185,3 @@
   </script>
 </body>
 </html>
-
