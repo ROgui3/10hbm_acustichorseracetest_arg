@@ -72,19 +72,45 @@
       width: 100vw;
       height: 100vh;
     }
+
+    #startAudio {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 12px 24px;
+      font-size: 1rem;
+      background: black;
+      color: #b84dff;
+      border: 1px solid #b84dff;
+      font-family: monospace;
+      z-index: 100;
+      cursor: pointer;
+      display: none;
+      animation: vhsFlicker 1.2s infinite;
+    }
+
+    #startAudio:hover {
+      background: #b84dff;
+      color: black;
+    }
   </style>
 </head>
 <body>
+
   <!-- Audio en loop oculto -->
-  <audio autoplay loop>
+  <audio id="ambiente" loop>
     <source src="loop ambient arg.mp3" type="audio/mpeg">
     Tu navegador no soporta audio HTML5.
   </audio>
 
+  <!-- Botón de fallback si autoplay falla -->
+  <button id="startAudio">🔊 Activar sonido</button>
+
   <!-- Ruido visual -->
   <canvas id="noise"></canvas>
 
-  <!-- Texto con efecto VHS -->
+  <!-- Texto VHS glitch -->
   <div class="vhs-wrapper">
     <div class="vhs-text">
       Después de que los pequeños caballitos lo humillaran y lo encerraran en la cárcel pobre y triste para aquellos que perdieron :( Él decidió escapar e ir a un bosque oscuro y muy terrorífico D: . Y es ahí donde Él iba a quedarse para siempre... hasta que Aquello apareció... "?sı̣ʇsı̣ɹʇ ɯɐʇ ɹnɔ 'ǝןnʌɹɐd 'ı̣ɥı̣ɯ ɔı̣ꓷ", Él respondió... "𝚖𝚎 𝚑𝚞𝚖𝚒𝚕𝚕𝚊𝚛𝚘𝚗 𝚎𝚗𝚏𝚛𝚎𝚗𝚝𝚎 𝚍𝚎 𝚝𝚘𝚍𝚘𝚜...", Aquello le responde ante su respuesta... "˙˙˙ʇunqɐʌnı̣pɐ ɯnʇןnɯ ǝʇ ǝɐnb oqɐp sɐɔı̣ƃɐɯ sǝɹı̣ʌ ı̣qı̣ʇ 'ı̣uǝʌ ˙˙˙ı̣ɯ ǝןnnbǝ 'ǝɹǝɯı̣ʇ ı̣ןoN"
@@ -92,7 +118,7 @@
     <div class="scanline"></div>
   </div>
 
-  <!-- Script para ruido -->
+  <!-- Script de ruido visual -->
   <script>
     const canvas = document.getElementById('noise');
     const ctx = canvas.getContext('2d');
@@ -115,6 +141,32 @@
     }
 
     setInterval(generateNoise, 50);
+  </script>
+
+  <!-- Script para intentar autoplay con fallback -->
+  <script>
+    const audio = document.getElementById("ambiente");
+    const button = document.getElementById("startAudio");
+
+    function tryPlay() {
+      audio.play().then(() => {
+        console.log("Audio iniciado automáticamente.");
+      }).catch(() => {
+        button.style.display = "block";
+      });
+    }
+
+    // Intento automático tras carga
+    window.addEventListener("load", () => {
+      button.click(); // intenta simular click
+      tryPlay();
+    });
+
+    // Si falla, usuario puede activarlo
+    button.addEventListener("click", () => {
+      tryPlay();
+      button.style.display = "none";
+    });
   </script>
 </body>
 </html>
